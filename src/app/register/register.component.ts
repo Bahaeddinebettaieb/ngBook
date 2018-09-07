@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { UserData } from '../classes/UserData';
 
 @Component({
   selector: 'app-register',
@@ -13,6 +14,8 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
   onSubmit(form){
-    this.authService.register(form.value.name, form.value.email, form.value.password );
+    this.authService.register(form.value.name, form.value.email, form.value.password ).then((userData) => {
+      this.authService.Login(userData)
+    })
   }
 }
