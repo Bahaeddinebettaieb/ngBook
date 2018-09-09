@@ -9,6 +9,8 @@ import { ROUTES } from './routes/routes';
 import { AuthService } from './services/auth.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './guards/auth.guard';
+import { AuthedGuard } from './guards/authed.guard';
 
 
 @NgModule({
@@ -24,7 +26,7 @@ import { LoginComponent } from './login/login.component';
     FormsModule,
     HttpModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard,AuthedGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
