@@ -5,10 +5,11 @@ import { Router } from '@angular/router';
 import { CONFIG } from './../config/config';
 import { User } from '../classes/user';
 import { UserData } from '../classes/UserData';
+import { NotifyService } from './notify.service';
 
 @Injectable () 
 export class AuthService {
-    constructor(private http :Http, private router: Router ) {}
+    constructor(private http :Http, private router: Router, private notifyService : NotifyService ) {}
 
     register(name : String , email: String, password: String): Promise<UserData> {
         return this.http.post(`${CONFIG.API_URL}/register`, {
@@ -25,7 +26,9 @@ export class AuthService {
     LogUserData(userData : UserData) : void {
         localStorage.setItem('token', userData.token)
         localStorage.setItem('user', JSON.stringify(userData.user))
+        this.notifyService.notify('sucessfully logged in', 'success')
         this.router.navigate(['/dashboard'])
+        
     }
 
     login(email: String , password : String): Promise<UserData> {
