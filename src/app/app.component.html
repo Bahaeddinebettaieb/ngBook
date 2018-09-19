@@ -1,3 +1,4 @@
+<ng-progress #progressBar></ng-progress>
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container">
       <div class="navbar-header">
@@ -13,7 +14,7 @@
         <ul class="nav navbar-nav navbar-right">
           <li *ngIf="!isLoggedIn()"><a routerLink="/auth/login">Login</a> </li>
           <li *ngIf="!isLoggedIn()"><a routerLink="/auth/register">Register</a> </li>
-          <li><a class="dropdown-toggle" role="button" (click)="logout()" *ngIf="isLoggedIn()">Logout</a> </li>
+          <li><a class="dropdown-toggle" role="button" [routerLink]="['/user/profile',user.id]"  *ngIf="isLoggedIn() && user">My profile</a> </li>
         </ul>
       </div>
     </div>
