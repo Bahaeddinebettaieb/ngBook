@@ -19,6 +19,10 @@ import { NotifyService } from './services/notify.service';
 import { ProfileComponent } from './profile/profile.component';
 import { UserService } from './services/user.service';
 import { PrettyDatePipe } from './pipes/pretty-date.pipe';
+import { WallComponent } from './profile/wall/wall.component';
+import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
+import { FollowComponent } from './profile/follow/follow.component';
+import { FollowService } from './services/follow.service';
 
 
 @NgModule({
@@ -30,6 +34,9 @@ import { PrettyDatePipe } from './pipes/pretty-date.pipe';
     NotifyComponent,
     ProfileComponent,
     PrettyDatePipe,
+    WallComponent,
+    EditProfileComponent,
+    FollowComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +45,7 @@ import { PrettyDatePipe } from './pipes/pretty-date.pipe';
     HttpModule,
     NgProgressModule
   ],
-  providers: [AuthService, AuthGuard,AuthedGuard,NotifyService,UserService],
+  providers: [AuthService, AuthGuard,AuthedGuard,NotifyService,UserService,FollowService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

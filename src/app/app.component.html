@@ -3,18 +3,19 @@
     <div class="container">
       <div class="navbar-header">
         <a class="navbar-brand">
-          Site title
+          Ng book 
         </a>
       </div>
       <div>
         <ul class="nav navbar-nav">
           <li><a>All jokes</a></li>
+          <li><a role="button" [routerLink]="['/user/profile',user.id]"  *ngIf="isLoggedIn() && user" >My profile</a></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
           <li *ngIf="!isLoggedIn()"><a routerLink="/auth/login">Login</a> </li>
           <li *ngIf="!isLoggedIn()"><a routerLink="/auth/register">Register</a> </li>
-          <li><a class="dropdown-toggle" role="button" [routerLink]="['/user/profile',user.id]"  *ngIf="isLoggedIn() && user">My profile</a> </li>
+          <li><a class="dropdown-toggle" role="button" *ngIf="isLoggedIn()"  (click)="logout()">Logout</a> </li>
         </ul>
       </div>
     </div>

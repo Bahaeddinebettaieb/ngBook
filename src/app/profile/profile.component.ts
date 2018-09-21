@@ -12,7 +12,9 @@ import { AuthService } from '../services/auth.service';
 export class ProfileComponent implements OnInit {
   id : number
   user : User
-  constructor(private router : ActivatedRoute, private userService : UserService, private authService: AuthService) { }
+  constructor(private router : ActivatedRoute, private userService : UserService, private authService: AuthService) { 
+    this.userService.userProfileUpdate.subscribe((user) => {this.user = user})
+  }
 
   isAuthUserProfile () : boolean {
     return this.id === +this.authService.getAuthUserId()
