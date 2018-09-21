@@ -1,7 +1,7 @@
 <div class="panel panel-default">
     <div class="panel-body">
       <div class="text-center">
-        <a class="btn btn-success" *ngIf="!isFollowing">Follow</a>
+        <a class="btn btn-success" *ngIf="!isFollowing" (click)="follow()">Follow</a>
       </div>
       <div class="text-center">
           <a class="btn btn-danger" *ngIf="isFollowing">Unfollow</a>

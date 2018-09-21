@@ -18,5 +18,12 @@ export class FollowComponent implements OnInit {
       })
   }
 
+  follow(){
+    this.followService.follow(this.currentProfileId)
+              .then((Response) => {
+                console.log(Response)
+                this.isFollowing = true
+              })
+  }
 
 }
