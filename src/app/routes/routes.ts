@@ -6,6 +6,7 @@ import { AuthedGuard } from '../guards/authed.guard';
 import { ProfileComponent } from '../profile/profile.component';
 import { WallComponent } from '../profile/wall/wall.component';
 import { EditProfileComponent } from '../profile/edit-profile/edit-profile.component';
+import { CreateJokeComponent } from '../create-joke/create-joke.component';
 
 export const ROUTES = [
   {path: 'auth/register', component: RegisterComponent, canActivate: [AuthedGuard]},
@@ -14,5 +15,6 @@ export const ROUTES = [
   {path : 'user/profile/:id' , component: ProfileComponent, canActivate: [AuthGuard], children: [
     {path : '', component: WallComponent},
     {path : 'edit', component: EditProfileComponent}
-  ]}
+  ]},
+  {path: 'create/joke', component: CreateJokeComponent}
 ];
