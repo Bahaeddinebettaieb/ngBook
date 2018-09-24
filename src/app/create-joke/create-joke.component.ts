@@ -29,7 +29,7 @@ export class CreateJokeComponent implements OnInit {
   }
    
   onSubmit(){
-    console.log('55')
+    console.log(this.jokeForm)
     console.log(this.jokeForm.value)
     this.jokeService.createJoke(this.jokeForm.value)
       .then(Response => {
