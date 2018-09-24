@@ -5,6 +5,7 @@ import { Http, Headers, RequestOptions } from "@angular/http";
 import { AuthService } from "./auth.service";
 import { CONFIG } from './../config/config';
 import { User } from "../classes/user";
+import { promise } from "protractor";
 
 @Injectable()
 export class UserService {
@@ -14,6 +15,14 @@ export class UserService {
         this.userProfileUpdate = new EventEmitter ()
         this.headers = new Headers({'Authorization': `Bearer ${this.authService.getToken()}`})
     }
+
+    getUserWall(id: number){
+        let options = new RequestOptions({headers : this.headers})
+        return this.http.get(`${CONFIG.API_URL}/user/profile/${id}/wall`,options).toPromise().then(
+            (Response) =>  {return Response.json()
+        })
+
+    }
     
     getUserById (id : number) : Promise <User> {
         if (id == this.authService.getAuthUserId()){
@@ -22,8 +31,8 @@ export class UserService {
         }
         let options = new RequestOptions({headers : this.headers})
         return this.http.get(`${CONFIG.API_URL}/user/${id}`,options).toPromise().then(
-            (Response) =>  {return Response.json()}
-        )
+            (Response) =>  {return Response.json()
+        })
     }
 
     updateProfile(name: String, email: String) : Promise <User> {

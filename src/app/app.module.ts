@@ -21,7 +21,7 @@ import { UserService } from './services/user.service';
 import { PrettyDatePipe } from './pipes/pretty-date.pipe';
 import { WallComponent } from './profile/wall/wall.component';
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
-import { FollowComponent } from './profile/follow/follow.component';
+import { FollowComponent } from "./profile/follow/follow.component";
 import { FollowService } from './services/follow.service';
 import { CreateJokeComponent } from './create-joke/create-joke.component';
 import { JokeService } from './services/jokes.service';
