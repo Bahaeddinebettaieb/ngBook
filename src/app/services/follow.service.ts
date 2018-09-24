@@ -12,12 +12,25 @@ export class FollowService {
         this.headers = new Headers({'Authorization': `Bearer ${this.authService.getToken()}`})
     }
 
+    unfollow(id : number) {
+        this.bar.start()
+        let url = `${CONFIG.API_URL}/user/unfollow`
+        let body = {user_to_unfollow_id: id}
+        let options = new RequestOptions ({headers: this.headers})
+        return this.http.post(url,body,options)
+            .toPromise()
+            .then(Response => {
+                this.bar.complete()
+                return Response.json()
+            })
+    }
+
     follow(id: number) {
         this.bar.start()
         let url = `${CONFIG.API_URL}/user/follow`
         let body = { user_to_follow_id: id}
         let options = new RequestOptions({headers: this.headers})
-        return this.http.post(url, body, options)
+        return this.http.post(url,body,options)
             .toPromise()
             .then(Response => {
                 this.bar.complete()
