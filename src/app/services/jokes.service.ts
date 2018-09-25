@@ -16,11 +16,26 @@ export class JokeService{
     
     createJoke(joke): Promise<any>{
         let url = `${CONFIG.API_URL}/jokes`
+        this.bar.start()
         let body = {title: joke.title, joke: joke.content}
         let options = new RequestOptions ({headers: this.headers})
         return this.http.post(url,body,options)
             .toPromise()
             .then(Response => {
+                this.bar.complete()
+                return Response.json()
+            })
+    }
+
+    updateJoke(id: number, joke){
+        let url = `${CONFIG.API_URL}/jokes/${id}`
+        this.bar.start()
+        let body = {title: joke.title, joke: joke.content}
+        let options = new RequestOptions ({headers: this.headers})
+        return this.http.put(url,body,options)
+            .toPromise()
+            .then(Response => {
+                this.bar.complete()
                 return Response.json()
             })
     }
@@ -32,10 +47,12 @@ export class JokeService{
         }else{
             url = `${CONFIG.API_URL}/jokes`
         }
+        this.bar.start()
         let options = new RequestOptions ({headers: this.headers})
         return this.http.get(url,options)
             .toPromise()
             .then(Response => {
+                this.bar.complete()
                 return Response.json()
             })
     }
