@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { JokeService } from '../services/jokes.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,10 +7,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
-  constructor() { }
+  data
+  constructor(private jokeService: JokeService) { }
 
   ngOnInit() {
+    this.getJokes()
+  }
+
+  getPrevJokes(){
+    this.getJokes(this.data.prev_page_url)
+  }
+
+  getNextJokes(){
+    this.getJokes(this.data.next_page_url)
+  }
+
+  getJokes(endPoint = null){
+    this.jokeService.getAllJokes(endPoint)
+      .then(Response  => {
+        console.log(Response)
+        this.data = Response
+      })
   }
 
 }
