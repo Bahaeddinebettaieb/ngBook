@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { User } from '../classes/user';
 import { AuthService } from '../services/auth.service';
+import { NgProgress } from '@ngx-progressbar/core';
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +13,7 @@ import { AuthService } from '../services/auth.service';
 export class ProfileComponent implements OnInit {
   id : number
   user : User
-  constructor(private router : ActivatedRoute, private userService : UserService, private authService: AuthService) { 
+  constructor(private router : ActivatedRoute, private bar: NgProgress ,private userService : UserService, private authService: AuthService) { 
     this.userService.userProfileUpdate.subscribe((user) => {this.user = user})
   }
 
@@ -22,8 +23,13 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.router.params.subscribe((params) => {
+      this.bar.start()
       this.id = +params['id']
-      this.userService.getUserById(this.id).then((user) => {this.user = user})
+      this.userService.getUserById(this.id)
+        .then((user) => {
+          this.user = user
+          this.bar.complete()
+        })
     })
   }
 

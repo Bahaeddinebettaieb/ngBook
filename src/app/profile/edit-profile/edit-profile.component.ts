@@ -3,6 +3,7 @@ import { User } from '../../classes/user';
 import { AuthService} from './../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import { NotifyService } from '../../services/notify.service';
+import { NgProgress } from '@ngx-progressbar/core';
 
 @Component({
   selector: 'app-edit-profile',
@@ -12,8 +13,7 @@ import { NotifyService } from '../../services/notify.service';
 export class EditProfileComponent implements OnInit {
   user: User
 
-  constructor(private authService : AuthService, private userService: UserService, private notifyService : NotifyService) { }
-
+  constructor(private authService : AuthService, private userService: UserService, private notifyService : NotifyService, private bar: NgProgress) { }
   ngOnInit() {
     this.user = this.authService.getAuthUser()
   }
