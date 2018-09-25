@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms'
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 
 import { AuthService } from '../services/auth.service';
 import { JokeService } from '../services/jokes.service';
+import { NotifyService } from '../services/notify.service';
 
 
 @Component({
@@ -12,10 +13,11 @@ import { JokeService } from '../services/jokes.service';
 })
 export class JokeComponent implements OnInit {
   @Input() joke
+  @Output() jokeDeleted = new EventEmitter()
   editing: boolean = false
   title = new FormControl()
   content = new FormControl()
-  constructor(private authService: AuthService, private jokeService: JokeService) { }
+  constructor(private authService: AuthService, private jokeService: JokeService, private notifyService: NotifyService) { }
 
   ngOnInit() {
     this.title = new FormControl(this.joke.title, Validators.required)
@@ -25,17 +27,35 @@ export class JokeComponent implements OnInit {
   canModify():boolean {
     return this.joke.user.id == this.authService.getAuthUserId()
   }
+
   edit(){
     this.editing = true
   }
+
   updateJoke(){
     this.jokeService.updateJoke(+this.joke.id, {
       title: this.title.value,
       content: this.content.value
     }).then(Response => {
       console.log('update')
-      console.log(Response)
+      this.joke = Response
+      this.editing = false
+      this.notifyService.notify('Joke Update', 'success')
     })
+  }
+
+  deleteJoke(){
+    this.jokeService.deleteJoke(+this.joke.id)
+      .then(Response => {
+        console.log(Response)
+        this.jokeDeleted.emit(this.joke.id)
+      })
+  }
+
+  cancel(){
+    this.title.reset()
+    this.content.reset()
+    this.editing = false
   }
 
 }

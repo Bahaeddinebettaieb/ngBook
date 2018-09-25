@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from './../services/auth.service'; 
+import { NotifyService } from '../services/notify.service';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import { AuthService } from './../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authservice : AuthService) { }
+  constructor(private authservice : AuthService, private notifyService: NotifyService) { }
 
   ngOnInit() {
   }
@@ -17,6 +18,10 @@ export class LoginComponent implements OnInit {
     this.authservice.login(form.value.email, form.value.password)
     .then ((userData) => {
       this.authservice.LogUserData(userData)
+    })
+    .catch(e => {
+      console.log(e)
+      this.notifyService.notify(e.error,'error')
     })
   }
 

@@ -13,6 +13,7 @@ export class AuthService {
     constructor(private http :Http, private router: Router, private notifyService : NotifyService, private bar : NgProgress ) {}
 
     register(name : String , email: String, password: String): Promise<UserData> {
+        this.bar.start()
         return this.http.post(`${CONFIG.API_URL}/register`, {
             name: name, email:email, password:password
         }).toPromise().then((Response) => {
@@ -21,6 +22,10 @@ export class AuthService {
             let userData = new UserData(token,user)
             return userData
          })
+         .catch(e => {
+            this.bar.complete()
+            return Promise.reject(e.json())
+        })
     }
 
     getAuthUser() : User {
@@ -43,15 +48,18 @@ export class AuthService {
         return localStorage.getItem('token')
     }
 
-    login(email: String , password : String): Promise<UserData> {
+    login(email: String , password : String): Promise<any> {
         this.bar.start()
         return this.http.post(`${CONFIG.API_URL}/authenticate`, {email:email, password:password
         }).toPromise().then((Response) => {
             let token = Response.json().token
             let user = Response.json().user.data
             let userData = new UserData(token,user)
-            this.bar.complete()
             return userData
+        })
+        .catch(e => {
+            this.bar.complete()
+            return Promise.reject(e.json())
         })
     }
 

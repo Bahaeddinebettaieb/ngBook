@@ -22,9 +22,12 @@
     <div class="panel-footer">
       {{joke.created_at |prettyDate}}
       <span *ngIf="canModify() && !editing">
-        <button class="btn btn-xs btn-danger pull-right">Delete</button>
-        <button class="btn btn-xs btn-info pull-right" (click)="edit()">Edit</button>
+        <button class="btn btn-xs btn-danger pull-right" (click)="deleteJoke()">Delete</button>
+        <button class="btn btn-xs btn-info pull-right" (click)="edit()" style="margin-right:5px;">Edit</button>
       </span>
+      <span *ngIf="editing">
+          <button class="btn btn-primary pull-right" [disabled]="title.invalid || content.invalid" (click)="cancel()" style="margin-right:5px;">Cancel Changes</button>
+        </span>
       <span *ngIf="editing">
         <button class="btn btn-primary pull-right" [disabled]="title.invalid || content.invalid" (click)="updateJoke()">Save Changes</button>
       </span>

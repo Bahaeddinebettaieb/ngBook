@@ -56,4 +56,16 @@ export class JokeService{
                 return Response.json()
             })
     }
+
+    deleteJoke(id: number){
+        let url = `${CONFIG.API_URL}/jokes/${id}`
+        this.bar.start()
+        let options = new RequestOptions ({headers: this.headers})
+        return this.http.delete(url,options)
+            .toPromise()
+            .then(Response => {
+                this.bar.complete()
+                return Response.json()
+            })
+    }
 }
