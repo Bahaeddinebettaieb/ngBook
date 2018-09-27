@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { NgProgressModule } from '@ngx-progressbar/core';
+import {GravatarModule} from '@infinitycube/gravatar';
 
 
 import { AppComponent } from './app.component';
@@ -26,6 +27,7 @@ import { FollowService } from './services/follow.service';
 import { CreateJokeComponent } from './create-joke/create-joke.component';
 import { JokeService } from './services/jokes.service';
 import { JokeComponent } from './joke/joke.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -42,6 +44,7 @@ import { JokeComponent } from './joke/joke.component';
     FollowComponent,
     CreateJokeComponent,
     JokeComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +52,8 @@ import { JokeComponent } from './joke/joke.component';
     FormsModule,
     HttpModule,
     NgProgressModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    GravatarModule
   ],
   providers: [AuthService, AuthGuard,AuthedGuard,NotifyService,UserService,FollowService,JokeService],
   bootstrap: [AppComponent]

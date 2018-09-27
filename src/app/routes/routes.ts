@@ -7,9 +7,11 @@ import { ProfileComponent } from '../profile/profile.component';
 import { WallComponent } from '../profile/wall/wall.component';
 import { EditProfileComponent } from '../profile/edit-profile/edit-profile.component';
 import { CreateJokeComponent } from '../create-joke/create-joke.component';
+import { HomeComponent } from '../home/home.component';
 
 export const ROUTES = [
   {path: 'auth/register', component: RegisterComponent, canActivate: [AuthedGuard]},
+  {path: '', component: HomeComponent, canActivate: [AuthedGuard]},
   {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   {path : 'auth/login' , component: LoginComponent, canActivate: [AuthedGuard]},
   {path : 'user/profile/:id' , component: ProfileComponent, canActivate: [AuthGuard], children: [

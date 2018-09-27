@@ -2,7 +2,7 @@
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container">
       <div class="navbar-header">
-        <a class="navbar-brand">
+        <a class="navbar-brand" routerLink="/">
           Ng book 
         </a>
       </div>
@@ -12,7 +12,7 @@
           <li><a role="button" [routerLink]="['/create/joke']"  *ngIf="isLoggedIn() && user" >Create joke</a></li>
          <!-- <li><a role="button" [routerLink]="['/user/profile',1]"  *ngIf="isLoggedIn() && user" >User 1 profile</a></li>-->
          <!-- <li><a role="button" [routerLink]="['/user/profile',2]"  *ngIf="isLoggedIn() && user" >User 2 profile</a></li>-->
-          <li><a role="button" [routerLink]="['/user/profile',user.id]"  *ngIf="isLoggedIn() && user" >My profile</a></li>
+          <li *ngIf="user"><a role="button" [routerLink]="['/user/profile',user.id]"  *ngIf="isLoggedIn() && user" >My profile</a></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
